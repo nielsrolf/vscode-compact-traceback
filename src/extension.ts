@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand('extension.hideLines', () => {
         const terminal = vscode.window.activeTerminal;
@@ -7,6 +8,6 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
         terminal.show();
-        terminal.sendText(`clear;tail -f ${terminal.name} | grep --line-buffered -v '^((?!\\w*\\.py)[\\s\\S])*'`);
+        terminal.sendText(`clear;tail -f ${terminal.name} | grep --line-buffered -v '^.*"/.*site-packages/.*'`);
     }));
 }
